@@ -15,7 +15,7 @@
 	</p>
 	
 	<script>
-	    $('input[type="search"]').aSearch({source:'http://testy.pandacommerce.net/search.json', chars:2})
+	    $('input[type="search"]').aSearch()
 	    	.on('selected',function(e,item){
 		    console.log("selected:",item);
 	    	}).parent().on('click','.asearch a',function(e){
