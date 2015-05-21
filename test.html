@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-	<link href="style.css" rel="stylesheet">
+	<link href="asearch.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="asearch.js"></script>
     </head>
@@ -14,7 +14,6 @@
 	    $('#search').aSearch().on('selected',function(e,item){
 		console.log("selected:",item);
 	    }).parent().on('click','.asearch a',function(e){
-	    	console.log("default click prevented",e);
 	    	e.preventDefault();  
 	    });
 	</script>
