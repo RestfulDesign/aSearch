@@ -142,17 +142,18 @@
 	    var url = item.url ?  location.protocol + item.url : undefined;
 	    var discounted = !!item.compare_price;
 	    
-	    h+= '<'+o.li+' title="'+title+'" data-row="' + i + '">\n';     
-	    h+= '<div>';
+	    h+= '<'+o.li+' title="'+title+'" data-row="' + i + '">\n';
+            if(url) h+= '<a href="' + url + '">\n';     
+	    else h+= '<div>';
 	    if(item.thumbnail) h+= '<img src="'+item.thumbnail+'">';
-	    if(url) h+= '<a href="' + url + '">\n';
+	    
 	    h+= '<h4>' + title + '</h4>\n';
 	    if(item.description) h+= '<p>' + item.description + '</p>\n';
 	    h+= '<b class="' + (discounted ? 'discount' : '') + '">' + item.price;
 	    if(item.compare_price) h+= '<i>' + item.compare_price + '</i>';
 	    h+= '</b>\n';
 	    if(url) h+= '</a>\n';
-	    h+= '</div>';
+	    else h+= '</div>';
 	    h+= '</'+o.li+'>\n';
 	    
 	    return h;
