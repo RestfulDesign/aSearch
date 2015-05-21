@@ -141,11 +141,10 @@
 	function renderItem(item,i){
 	    var h = '';
 	    var title = item.title || '&nbsp;';
-	    var url = item.url ?  location.protocol + item.url : undefined;
 	    var discounted = !!item.compare_price;
 	    
 	    h+= '<'+o.li+' title="'+title+'" data-row="' + i + '">';
-            if(url) h+= '<a href="' + url + '">';     
+            if(item.url) h+= '<a href="' + item.url + '">';     
 	    else h+= '<div>';
 	    if(item.thumbnail) h+= '<img src="'+item.thumbnail+'">';
 	    
@@ -154,7 +153,7 @@
 	    if(item.compare_price) h+= '<i>' + item.compare_price + '</i>';
 	    if(item.price) h+= '<b class="' + (discounted ? 'discount' : '') + '">' + item.price + '</b>';
 	    
-	    if(url) h+= '</a>';
+	    if(item.url) h+= '</a>';
 	    else h+= '</div>';
 	    h+= '</'+o.li+'>\n';
 	    
