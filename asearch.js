@@ -11,7 +11,7 @@
     
     var defaults = {
 	source: '/search.json', // search source
-	notFound: 'not found',	// not found message
+	notFound: undefined,	// not found message
 	asClass: 'asearch',     // dropdown list class
 	visible: false,       	// initial visibility
 	wrapper: '<div/>',      // wrapper element type
@@ -211,12 +211,13 @@
 	    }
 	}
 	
-	// when empty insert not found
+	// when empty insert not found or hide
 	if(!content) {
-	    content+= '<'+o.li+'>\n';
-	    content+= '<'+o.lt+' title="'+o.notFound+'">\n';
-	    content+= '</'+o.lt+'>\n';
-	    content+= '</'+o.li+'>\n';
+	    if(o.notFound) {
+		content+= '<'+o.li+' title="'+o.notFound+'">';
+		content+= o.notFound;
+		content+= '</'+o.li+'>\n';
+	    } else o.toggle(false);
 	}  
 
 	elem.html(content);
