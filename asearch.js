@@ -55,7 +55,6 @@
 	    for(var key in cached) {
 		if(key === query) {
 		    // cache hit
-		    console.log("cache hit!");
 		    render(o,cached[key],query);
 		    return;
 		}
