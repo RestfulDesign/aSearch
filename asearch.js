@@ -32,7 +32,7 @@
     };
     
     // search result mapping and normalization
-    defaults.filter = function(data,key){
+    defaults.normalize = function(data){
 	var list = data.results ? data.results.map(function(m) {
 	    return {
 		url: m.url,
@@ -75,6 +75,7 @@
 	    method: o.method || 'get',
 	    dataType: o.type || 'json'
 	}).done(function(data){
+            data = o.normalize(data);
 	    cached[query] = data;
 	    render(o,data,query);
 	}).fail(function(e){
