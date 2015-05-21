@@ -9,6 +9,8 @@
 (function( $ ){
     "use strict";
     
+    var plugin = "aSearch";
+    
     var defaults = {
 	source: '/search.json', // search source
 	notFound: undefined,	// not found message
@@ -224,8 +226,21 @@
 
 	return this;  
     }
+
+    var instanceCounter = 0;
     
-    $.fn.aSearch = function(options) {
+    $.fn.aSearch = function() {
+	var args = Array.prototype.slice.call(arguments);
+	
+	if($.data(this, plugin)) return this;
+	
+	return $(this).each(function() {
+	    aSearch.apply($(this),args);
+            $.data(this, plugin);
+	});
+    };
+
+    function aSearch(options){
 	options = options || {};
 	
 	// Note: An array can be used as data source for searches
@@ -242,8 +257,9 @@
             
             if(x < 0) throw new TypeError("wrapper");
             
-            o.id =  o.asClass + '-wrapper';            
-            o.wrapper = o.wrapper.substr(0,x-1) + ' id="' + o.id + '" ' + o.wrapper.substr(x,o.wrapper.length);
+            o.className = o.asClass + '-wrapper';
+            o.id = o.asClass + instanceCounter++;
+            o.wrapper = o.wrapper.substr(0,x-1) + ' id="' + o.id + '" class="' + o.className + '"' + o.wrapper.substr(x,o.wrapper.length);
         }
         
         // wrap target element

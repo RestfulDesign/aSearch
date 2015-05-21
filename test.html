@@ -6,16 +6,21 @@
 	<script src="asearch.js"></script>
     </head>
     <body>	
-	<p>Search:
-	    <input type="text" id="search">
+	<p>Search1:
+	    <input type="search">
+	</p>
+
+	<p>Search2:
+	    <input type="search">
 	</p>
 	
 	<script>
-	    $('#search').aSearch().on('selected',function(e,item){
-		console.log("selected:",item);
-	    }).parent().on('click','.asearch a',function(e){
-	    	e.preventDefault();  
-	    });
+	    $('input[type="search"]').aSearch({source:'http://testy.pandacommerce.net/search.json', chars:2})
+	    	.on('selected',function(e,item){
+		    console.log("selected:",item);
+	    	}).parent().on('click','.asearch a',function(e){
+	    	    e.preventDefault();  
+	        });	
 	</script>
     </body>
 </html>
