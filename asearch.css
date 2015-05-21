@@ -6,7 +6,7 @@
     position:absolute;
     display: none;
     margin: 0;
-    padding: 0;
+    padding: 0.5em;
     background: white;
     background-color: rgba(255,255,255,0.99);
     border: 1px outset;
@@ -48,13 +48,13 @@
 }
 .asearch li b {
     color: grey;
+    margin-left: 1em;
     margin-bottom: 1em;
 }
 .asearch li b.discount {
     color:red;
 }
-.asearch li b i {
+.asearch li i {
     color: grey;
-    margin-left: 1em;
     text-decoration: line-through;
 }
