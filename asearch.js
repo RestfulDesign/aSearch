@@ -235,7 +235,7 @@
 	if($.data(this, plugin)) return this;
 	
 	return $(this).each(function() {
-	    aSearch.apply($(this),args);
+	    aSearch.apply(this,args);
             $.data(this, plugin);
 	});
     };
@@ -249,7 +249,7 @@
         var o = $.extend({},defaults,options);
         var selector = [o.lt,o.li].join(' ');
 
-	o.target = this;
+	o.target = $(this);
         
         // create wrapper element
         if(o.wrapper.indexOf('id=') < 0) {
@@ -263,7 +263,7 @@
         }
         
         // wrap target element
-        this.wrap(o.wrapper);
+        $(this).wrap(o.wrapper);
         o.elem = $('#'+o.id);
 
 	// result list 
