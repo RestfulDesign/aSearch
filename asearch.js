@@ -1,7 +1,7 @@
 /*
  * pandaCommerce auto complete jQuery plugin
  * Author <anders at restfuldesign com>
- * Version 0.0.1
+ * Version 0.0.2
  */
 
 /*global location jQuery setTimeout clearTimeout */
@@ -287,6 +287,8 @@
 	// if o.chars = 0, perform search on init
         if(!o.chars) performSearch(o,null);
 
+	var inputValue = "";
+	
 	// attach event handlers
         o.elem.on('mousedown touchstart',selector,function(event){  
             var data = o.elem.data('results');
@@ -294,25 +296,20 @@
 	    
             o.target.trigger('selected',data[row]);
         }).on('keyup','input',function(event) { 
-            var keyCode = event.keyCode || event.which,
-		validKey =
-		    (keyCode == 8)                   || // backspace
-		    (keyCode > 47 && keyCode < 58)   || // number keys
-		    (keyCode > 64 && keyCode < 91)   || // letter keys
-		    (keyCode > 95 && keyCode < 112)  || // numpad keys
-		    (keyCode > 186 && keyCode < 192);   // =,-./ 
-
-	    if(validKey) {
-		if(this.value.length >= o.chars){
-                    performSearch(o,this.value);
+            if(this.value !== inputValue){
+                
+                inputValue = this.value;
+                
+        	if(inputValue.length >= o.chars){
+                    performSearch(o,inputValue);
                     o.toggle(true);
-		} else o.toggle(false);
+        	} else o.toggle(false);
             }
-        }).on('click touchend','input',function(event){  
+        }).on('click','input',function(event){  
             if(this.value.length >= o.chars) o.toggle();
-	}).on('blur','input',function(event){
+    	}).on('blur','input',function(event){
             o.toggle(false);
-	});
+    	});
 	
 	return this;
     };
