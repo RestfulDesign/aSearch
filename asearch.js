@@ -1,7 +1,7 @@
 /*
  * pandaCommerce auto complete jQuery plugin
  * Author <anders at restfuldesign com>
- * Version 0.0.2
+ * Version 0.0.3
  */
 
 /*global location jQuery setTimeout clearTimeout */
@@ -19,7 +19,8 @@
 	wrapper: '<div/>',      // wrapper element type
 	animate: 300,       	// animation time in ms
 	search: 'q',         	// ajax search parameter
-	delay: 200,         	// search pre-delay in ms
+	delay: 200,         	// pre-delay in ms
+        threshold: 250,         // click/touch threshold
 	chars: 3,            	// input threshold
 	cache: {},		// result cache
 	lt: 'ul',           	// list type
@@ -29,7 +30,7 @@
     // default query options
     defaults.query = {
 	type: 'product',
-	fields: ['title','url','thumbnail','price','meta_description','compare_at_price'],
+	fields: ['title','url','thumbnail','price',/*'meta_description',*/'compare_at_price'],
 	limit: 0
     };
     
@@ -276,8 +277,16 @@
             enumerable: false,
             value: function(state) {
 		o.visible = state === undefined ? !o.visible : state;
-		if(o.visible) o.listElem.show(o.animate);
-		else o.listElem.hide(o.animate);              
+		if(o.visible) {
+                    o.listElem.show(o.animate);
+                    o.target.trigger('show');
+                }
+		else {
+                    o.listElem.hide(o.animate);
+                    o.target.trigger('hide');
+                }
+
+                
 	    }
         });
 
@@ -288,13 +297,39 @@
         if(!o.chars) performSearch(o,null);
 
 	var inputValue = "";
-	
+        var timeStamp = false;
+
+        function doSelect(target){
+            var data = o.elem.data('results'),
+	        row = $(target).attr('data-row'),
+                href = $(target).attr('href');
+
+            if(!href) {
+                href = $(target).find('a').first().attr('href');
+            }
+            
+            o.target.trigger('selected',href,data[row]);
+        }
+        
 	// attach event handlers
-        o.elem.on('mousedown touchstart',selector,function(event){  
-            var data = o.elem.data('results');
-	    var row = $(this).attr('data-row');
-	    
-            o.target.trigger('selected',data[row]);
+        o.elem.on('touchstart',selector,function(event){
+            timeStamp = event.timeStamp;
+        }).on('touchend',selector,function(event){
+            var row, data, href, delta;
+
+            delta = event.timeStamp - timeStamp;
+
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if(delta < o.threshold) {           
+                doSelect(this);
+            }
+            
+            return false;  
+        }).on('click',selector,function(event) {
+            event.preventDefault();
+            doSelect(this);
         }).on('keyup','input',function(event) { 
             if(this.value !== inputValue){
                 
@@ -308,7 +343,9 @@
         }).on('click','input',function(event){  
             if(this.value.length >= o.chars) o.toggle();
     	}).on('blur','input',function(event){
-            o.toggle(false);
+            setTimeout(function(){
+                o.toggle(false);
+            },o.delay);
     	});
 	
 	return this;

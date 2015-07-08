@@ -14,6 +14,7 @@
     border-top: none;
     border-radius: 0  0 0.25em 0.25em;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     z-index: 1000;
 }
 .asearch li {
