@@ -1,0 +1,29 @@
+{
+  "name": "aSearch",
+  "main": [
+        "asearch.js",
+        "asearch.css"
+  ],
+  "version": "0.0.3",
+  "homepage": "https://github.com/RestfulDesign/aSearch",
+  "authors": [
+    "anders@restfuldesign.com"
+  ],
+  "description": "PandaCommerce jquery autocomplete search",
+  "moduleType": [
+    "globals"
+  ],
+    "keywords": [
+    "jquery",
+    "pandacommerce",
+    "autocomplete"
+  ],
+  "license": "Apache2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
