@@ -5,7 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="asearch.js"></script>
     </head>
-    <body>	
+    <body>
 	<p>Search1:
 	    <input type="search">
 	</p>
@@ -15,12 +15,16 @@
 	</p>
 	
 	<script>
-	    $('input[type="search"]').aSearch()
+            var red_dot = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAAGElEQVQIW2P4DwcMDAxAfBvMAhEQMYgcACEHG8ELxtbPAAAAAElFTkSuQmCC';
+            var test_data = [
+            {title:"test product #1",price:1230,url:"#1", thumbnail:red_dot},
+            {title:"test product #2",price:1231, compare_price:1240,url:"#2", thumbnail:red_dot}
+            ];
+            
+	    $('input[type="search"]').aSearch(test_data)
 	    	.on('selected',function(e,item){
 		    console.log("selected:",item);
-	    	}).parent().on('click','.asearch a',function(e){
-	    	    e.preventDefault();  
-	        });	
+	    	});
 	</script>
     </body>
 </html>

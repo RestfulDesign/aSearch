@@ -1,11 +1,14 @@
+/* aSearch v0.0.4 */
 .asearch-wrapper {
     display: inline-block;
     position: relative;
+    width: inherit;
 }
 .asearch {
     position:absolute;
-    display: none;
+    display: block;
     margin: 0;
+    margin-top: -2px; 
     padding: 0;
     max-height: 24em;
     background: white;
@@ -14,8 +17,10 @@
     border-top: none;
     border-radius: 0  0 0.25em 0.25em;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     z-index: 1000;
+    text-align: right;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; 
 }
 .asearch li {
     clear: left;
@@ -29,8 +34,8 @@
     padding: 0.25em 0.5em;
 }
 .asearch li:hover {
-    background: #fafafa;
-    background-color: rgba(0,0,0,0.01);
+    background: #fbfbfb;
+    outline: 1px solid #efefef;
 }
 .asearch li img {
     float:left;
@@ -46,6 +51,7 @@
     margin: 0;
     font-size: 0.8em;
     font-weight: normal;
+    text-align: left;
 }
 .asearch li p {
     font-size: 0.8em;
@@ -53,6 +59,7 @@
     margin: 0;
 }
 .asearch li b {
+    font-size: 0.8em;
     color: grey;
     margin-left: 1em;
     margin-bottom: 1em;
@@ -61,6 +68,7 @@
     color:red;
 }
 .asearch li i {
+    font-size: 0.8em;
     color: grey;
     text-decoration: line-through;
 }
