@@ -271,26 +271,19 @@
         o.listElem = $(o.lt,o.elem);
         
         // a toggle helper due to issues with jQuery toggle()
-        Object.defineProperty(o,'toggle',{
-            writable:false,
-            readable: true,
-            enumerable: false,
-            value: function(state) {
-		o.visible = state === undefined ? !o.visible : state;
-		if(o.visible) {
-                    o.listElem.show(o.animate);
-                    o.target.trigger('show');
-                }
-		else {
-                    o.listElem.hide(o.animate);
-                    o.target.trigger('hide');
-                }
+        o.toggle = function(state) {
+            o.visible = state === undefined ? !o.visible : state;
+	    if(o.visible) {
+                o.listElem.show(o.animate);
+                o.target.trigger('show');
+            }
+	    else {
+                o.listElem.hide(o.animate);
+                o.target.trigger('hide');
+            }
+        };
 
-                
-	    }
-        });
-
-	// toggle initial visibility
+        // toggle initial visibility
         o.toggle(o.visible);
 
 	// if o.chars = 0, perform search on init
