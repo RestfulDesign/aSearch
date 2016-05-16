@@ -1,7 +1,7 @@
 /*
  * pandaCommerce auto complete jQuery plugin
  * Author <anders at restfuldesign com>
- * Version 0.0.4
+ * Version 0.0.5
  */
 
 /*global location jQuery setTimeout clearTimeout */
