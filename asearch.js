@@ -142,17 +142,18 @@
 	function renderItem(item,i){
 	    var h = '';
 	    var title = item.title || '&nbsp;';
-	    var discounted = !!item.compare_price;
+            var price = (item.price && parseFloat(item.price)) || 0;
+	    var compare_price = (item.compare_price && parseFloat(item.compare_price)) || 0;
 	    
-	    h+= '<'+o.li+' title="'+title+'" data-row="' + i + '">';
+            h+= '<'+o.li+' title="'+title+'" data-row="' + i + '">';
             if(item.url) h+= '<a href="' + item.url + '">';     
 	    else h+= '<div>';
 	    if(item.thumbnail) h+= '<img src="'+item.thumbnail+'">';
 	    
 	    h+= '<h4>' + title + '</h4>';
 	    if(item.description) h+= '<p>' + item.description + '</p>';
-	    if(item.compare_price) h+= '<i>' + item.compare_price + '</i>';
-	    if(item.price) h+= '<b class="' + (discounted ? 'discount' : '') + '">' + item.price + '</b>';
+	    if(compare_price) h+= '<i>' + compare_price + '</i>';
+	    if(price) h+= '<b class="' + (compare_price > price ? 'discount' : '') + '">' + price + '</b>';
 	    
 	    if(item.url) h+= '</a>';
 	    else h+= '</div>';
